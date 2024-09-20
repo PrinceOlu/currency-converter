@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Currency Converter</title>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- Feather Icons -->
+    <script src="./script.js" defer></script>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      .active-tab {
+        display: block;
+      }
+      .hidden-tab {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="card">
+        <div class="card-header">
+          <!-- Tab Navigation -->
+          <ul class="nav nav-tabs" id="currencyTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active"
+                id="convert-tab"
+                data-bs-toggle="tab"
+                href="#convertUI"
+                role="tab"
+                aria-controls="convertUI"
+                aria-selected="true"
+              >
+                Convert
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="exchange-rate-tab"
+                data-bs-toggle="tab"
+                href="#exchangeRateUI"
+                role="tab"
+                aria-controls="exchangeRateUI"
+                aria-selected="false"
+              >
+                Exchange Rate
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+          <!-- Convert Card UI -->
+          <div
+            class="tab-pane fade show active"
+            id="convertUI"
+            role="tabpanel"
+            aria-labelledby="convert-tab"
+          >
+            <div class="card-body">
+              <h5 class="card-title">Currency Converter</h5>
+              <div class="mb-3">
+                <label for="amount" class="form-label">Amount</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="amount"
+                  placeholder="Enter amount"
+                />
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="fromCurrency" class="form-label">From</label>
+                  <select class="form-select" id="fromCurrency">
+                    <option value="USD">USD - US Dollar</option>
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="GBP">GBP - British Pound</option>
+                    <option value="CAD">CAD - Canadian Dollar</option>
+                    <option value="NGN">NGN - Nigerian Naira</option>
+                    <option value="JPY">JPY - Japanese Yen</option>
+                    <option value="AUD">AUD - Australian Dollar</option>
+                    <option value="CNY">CNY - Chinese Yuan</option>
+                    <option value="INR">INR - Indian Rupee</option>
+                    <option value="BRL">BRL - Brazilian Real</option>
+                    <option value="ZAR">ZAR - South African Rand</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label for="toCurrency" class="form-label">To</label>
+                  <select class="form-select" id="toCurrency">
+                    <option value="USD">USD - US Dollar</option>
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="GBP">GBP - British Pound</option>
+                    <option value="CAD">CAD - Canadian Dollar</option>
+                    <option value="NGN">NGN - Nigerian Naira</option>
+                    <option value="JPY">JPY - Japanese Yen</option>
+                    <option value="AUD">AUD - Australian Dollar</option>
+                    <option value="CNY">CNY - Chinese Yuan</option>
+                    <option value="INR">INR - Indian Rupee</option>
+                    <option value="BRL">BRL - Brazilian Real</option>
+                    <option value="ZAR">ZAR - South African Rand</option>
+                  </select>
+                </div>
+              </div>
+              <button id="convertBtn" class="btn btn-primary">Convert</button>
+              <div class="mt-3">
+                <h6>Converted Amount:</h6>
+                <div id="result"></div>
+                <!-- Ensure this ID is used in JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Exchange Rate UI -->
+          <div
+            class="tab-pane fade"
+            id="exchangeRateUI"
+            role="tabpanel"
+            aria-labelledby="exchange-rate-tab"
+          >
+            <div class="card-body">
+              <h5 class="card-title">Exchange Rate</h5>
+              <div class="mb-3">
+                <label for="baseCurrency" class="form-label"
+                  >Select Base Currency</label
+                >
+                <select class="form-select" id="baseCurrency">
+                  <option value="USD">USD - US Dollar</option>
+                  <option value="EUR">EUR - Euro</option>
+                  <option value="GBP">GBP - British Pound</option>
+                  <option value="CAD">CAD - Canadian Dollar</option>
+                  <option value="NGN">NGN - Nigerian Naira</option>
+                  <option value="JPY">JPY - Japanese Yen</option>
+                  <option value="AUD">AUD - Australian Dollar</option>
+                  <option value="CNY">CNY - Chinese Yuan</option>
+                  <option value="INR">INR - Indian Rupee</option>
+                  <option value="BRL">BRL - Brazilian Real</option>
+                  <option value="ZAR">ZAR - South African Rand</option>
+                </select>
+              </div>
+              <button id="getRatesBtn" class="btn btn-primary">
+                Get Rates
+              </button>
+              <div class="mt-3">
+                <h6>Exchange Rates:</h6>
+                <div id="exchangeRate"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script>
+      feather.replace(); // Initialize Feather icons after DOM loads
+    </script>
+  </body>
+</html>
